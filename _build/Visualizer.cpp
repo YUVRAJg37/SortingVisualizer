@@ -1,17 +1,15 @@
-#include <iostream>
-
 #include "Sort/BubbleSort/BubbleSort.h"
 #include "Screen.h"
 #include "Menu.h"
 #include "vector"
 
-#define MAX_DATA 100
+#define MAX_DATA 1000
 
 int main()
 {
 	BubbleSort q_bubble_sort;
 	ScreenInfo screenInfo;
-	Menu menu(5, 50, 50);
+	Menu menu(50, 50);
 	
 	const int screenWidth = screenInfo.screenWidth;
 	const int screenHeight = screenInfo.screenHeight;
@@ -25,6 +23,8 @@ int main()
 		dataArray.push_back(GetRandomValue(1, screenHeight));
 	
 	InitWindow(screenWidth, screenHeight, "Sort");
+
+	SetTargetFPS(60.0f);
 	
 	while (!WindowShouldClose())
 	{
@@ -34,9 +34,18 @@ int main()
 
 		BeginDrawing();
 
-		menu.Init();
+		menu.PushButton();
 		
-		WaitTime(0.02);
+		menu.AddButton("Bubble");
+		menu.AddButton("Quick");
+		menu.AddButton("Merge");
+		menu.AddButton("Heap");
+		menu.AddButton("GNome");
+		
+
+		menu.PopButton();
+		
+		//WaitTime(0.02);
 
 		if (cache.i != MAX_DATA - 1)
 		{

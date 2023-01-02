@@ -1,20 +1,32 @@
 ﻿#pragma once
-#include <complex.h>
+
+#include <queue>
+
+#include "raylib.h"
 
 class Menu
 {
 public:
     
-    Menu(int totalMenus, int spacing_x, int spacing_y);
-    void Init();
+    Menu(int spacing_x, int spacing_y);
+    
+    void AddButton(const char* buttonName);
+    void PushButton();
+    void PopButton();
 
 private:
     
     int ButtonWidth;
     int ButtonHeight;
-    int TotalMenus;
-    int Spacing_X;
+    int TotalButtonCount;
     int Spacing_Y;
+    int Pos_X;
+    std::vector<Rectangle> Buttons;
+    int CurrentTouchedButtonIndex;
+
+    std::queue<const char*> ButtonNames;
+    int CollisionTest();
+    void DrawButtons();
 
 public:
 
