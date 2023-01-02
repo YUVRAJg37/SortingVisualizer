@@ -1,3 +1,6 @@
+#include <iostream>
+#include <string>
+
 #include "Sort/BubbleSort/BubbleSort.h"
 #include "Screen.h"
 #include "Menu.h"
@@ -29,9 +32,6 @@ int main()
 	while (!WindowShouldClose())
 	{
 		ClearBackground(BLACK);
-
-		q_bubble_sort.SortData(dataArray, MAX_DATA,cache);
-
 		BeginDrawing();
 
 		menu.PushButton();
@@ -42,11 +42,18 @@ int main()
 		menu.AddButton("Heap");
 		menu.AddButton("GNome");
 		
-
 		menu.PopButton();
 		
-		//WaitTime(0.02);
+		int x = menu.getCurrentPressedButtonIndex();
 
+		switch (x)
+		{
+		case 0 :
+			{
+				q_bubble_sort.SortData(dataArray, MAX_DATA,cache);
+			}
+		}
+		
 		if (cache.i != MAX_DATA - 1)
 		{
 			float space{ 0 };

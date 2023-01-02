@@ -22,7 +22,8 @@ private:
     int Spacing_Y;
     int Pos_X;
     std::vector<Rectangle> Buttons;
-    int CurrentTouchedButtonIndex;
+    int CurrentHoveredButtonIndex;
+    int CurrentPressedButtonIndex;
 
     std::queue<const char*> ButtonNames;
     int CollisionTest();
@@ -32,6 +33,7 @@ public:
 
     inline int getButtonWidth() const{return ButtonWidth;}
     inline int getButtonHeight() const{return ButtonHeight;}
+    inline int getCurrentPressedButtonIndex() const {return CurrentPressedButtonIndex;}
     
 };
 

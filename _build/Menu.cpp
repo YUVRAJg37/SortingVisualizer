@@ -8,7 +8,8 @@ Menu::Menu(int spacing_x, int spacing_y) :
 TotalButtonCount(0),
 Pos_X(0),
 ButtonHeight(0),
-ButtonWidth(0)
+ButtonWidth(0),
+CurrentPressedButtonIndex(-1)
 {
     ScreenInfo screenInfo;
 
@@ -57,9 +58,9 @@ void Menu::DrawButtons()
         border.width = ButtonWidth - 2*padding;
         border.height = ButtonHeight - 2*padding;
 
-        Color BorderColor = CurrentTouchedButtonIndex == i ? DARKBLUE : LIGHTGRAY;
-        Color TextColor = CurrentTouchedButtonIndex == i ? DARKBLUE : GRAY;
-        Color ButtonColor = CurrentTouchedButtonIndex == i ? SKYBLUE : LIGHTGRAY;
+        Color BorderColor = CurrentHoveredButtonIndex == i ? DARKBLUE : LIGHTGRAY;
+        Color TextColor = CurrentHoveredButtonIndex == i ? DARKBLUE : GRAY;
+        Color ButtonColor = CurrentHoveredButtonIndex == i ? SKYBLUE : LIGHTGRAY;
 
         
         DrawRectangleRec( button ,BorderColor);
@@ -69,7 +70,7 @@ void Menu::DrawButtons()
         ButtonNames.pop();
     }
 
-    CurrentTouchedButtonIndex = CollisionTest();
+    CurrentHoveredButtonIndex = CollisionTest();
 }
 
 int Menu::CollisionTest()
@@ -78,6 +79,8 @@ int Menu::CollisionTest()
     {
         if(CheckCollisionPointRec(GetMousePosition(), Buttons[i]))
         {
+            if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
+                CurrentPressedButtonIndex = i;
             return i;
         }
     }
