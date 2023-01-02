@@ -6,9 +6,9 @@ std::vector<int> Sort::SortData(std::vector<int> &data, int size,Cache& cache)
 }
 
 template <typename type>
-void Sort::Swap(type* first, type* second)
+void Sort::Swap(type *first, type *second)
 {
-	type* temp = first;
-	first = second;
-	second = temp;
+	type temp = *first;
+	*first = *second;
+	*second = temp;
 }

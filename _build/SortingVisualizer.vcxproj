@@ -173,6 +173,8 @@
     <ClInclude Include="Menu.h" />
     <ClInclude Include="Screen.h" />
     <ClInclude Include="Sort\BubbleSort\BubbleSort.h" />
+    <ClInclude Include="Sort\QuickSort\QuickSort.h" />
+    <ClInclude Include="Sort\SelectionSort\SelectionSort.h" />
     <ClInclude Include="Sort\Sort.h" />
   </ItemGroup>
   <ItemGroup>
@@ -183,6 +185,8 @@
   <ItemGroup>
     <ClCompile Include="Menu.cpp" />
     <ClCompile Include="Sort\BubbleSort\BubbleSort.cpp" />
+    <ClCompile Include="Sort\QuickSort\QuickSort.cpp" />
+    <ClCompile Include="Sort\SelectionSort\SelectionSort.cpp" />
     <ClCompile Include="Sort\Sort.cpp" />
     <ClCompile Include="Visualizer.cpp" />
   </ItemGroup>

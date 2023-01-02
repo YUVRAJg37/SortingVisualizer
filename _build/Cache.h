@@ -4,5 +4,6 @@ struct Cache
 {
 	int i{0};
 	int j{0};
-	bool secondLoop{ true };
+
+	void Reset(){i =0; j=0;}
 };
