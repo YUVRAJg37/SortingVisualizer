@@ -1,4 +1,6 @@
 #pragma once
+#include <vector>
+
 #include "raylib.h"
 
 class DataColor
@@ -9,6 +11,6 @@ public:
 
 private:
 
-	Color* m_ColorData;
+	std::vector<Color> m_DataColor;
 };
 

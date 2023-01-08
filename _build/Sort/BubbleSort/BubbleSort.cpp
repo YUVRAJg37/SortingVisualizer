@@ -8,9 +8,9 @@ std::vector<int> BubbleSort::SortData(std::vector<int> &data, int size,Cache& ca
 		{
 			if(data[cache.j] > data[cache.j + 1])
 			{
-				int temp = data[cache.j];
+				int Temp = data[cache.j];
 				data[cache.j] = data[cache.j+1];
-				data[cache.j+1] = temp;
+				data[cache.j+1] = Temp;
 			}
 
 			cache.j++;

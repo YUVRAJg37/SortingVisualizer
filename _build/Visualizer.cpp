@@ -8,6 +8,8 @@
 
 #define MAX_DATA 1000
 
+#define Lock_FPS 0
+
 void InitializeData(std::vector<int> &data, int min, int max);
 
 int main()
@@ -18,21 +20,23 @@ int main()
 	ScreenInfo screenInfo;
 	Menu menu(50, 50);
 	
-	const int screenWidth = screenInfo.screenWidth;
-	const int screenHeight = screenInfo.screenHeight;
-	const int visualizerWidth = screenInfo.visualizerWidth;
+	const int ScreenWidth = screenInfo.screenWidth;
+	const int ScreenHeight = screenInfo.screenHeight;
+	const int VisualizerWidth = screenInfo.visualizerWidth;
 	
-	std::vector<int> dataArray{0};
+	std::vector<int> DataArray{0};
 	Cache cache;
 
-	InitializeData(dataArray, 1, screenHeight);
+	InitializeData(DataArray, 1, ScreenHeight);
 	
-	InitWindow(screenWidth, screenHeight, "Sort");
+	InitWindow(ScreenWidth, ScreenHeight, "Sort");
 
 	int PreviousButtonIndex = -1;
 
+#if Lock_FPS
 	SetTargetFPS(60.0f);
-	
+#endif
+
 	while (!WindowShouldClose())
 	{
 		ClearBackground(BLACK);
@@ -53,7 +57,7 @@ int main()
 		if(CurrentButtonIndex != PreviousButtonIndex)
 		{
 			std::cout<<"Reset";
-			InitializeData(dataArray, 1, screenHeight);
+			InitializeData(DataArray, 1, ScreenHeight);
 			cache.Reset();
 		}
 
@@ -61,12 +65,12 @@ int main()
 		{
 		case 0 :
 			{
-				bubbleSort.SortData(dataArray, MAX_DATA,cache);
+				bubbleSort.SortData(DataArray, MAX_DATA,cache);
 				break;
 			}
 		case 1 :
 			{
-				selectionSort.SortData(dataArray, MAX_DATA, cache);
+				selectionSort.SortData(DataArray, MAX_DATA, cache);
 				break;
 			}
 		default: break;
@@ -75,8 +79,8 @@ int main()
 		float space{ 0 };
 		for (int i = 0; i < MAX_DATA; i++)
 		{
-			DrawRectangle(space, screenHeight - dataArray[i], (float)visualizerWidth/ MAX_DATA, dataArray[i], WHITE);
-			space += (float)visualizerWidth / MAX_DATA;
+			DrawRectangle(space, ScreenHeight - DataArray[i], (float)VisualizerWidth/ MAX_DATA, DataArray[i], WHITE);
+			space += (float)VisualizerWidth / MAX_DATA;
 		}
 
 		EndDrawing();

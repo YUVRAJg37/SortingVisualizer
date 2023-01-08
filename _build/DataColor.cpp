@@ -1,8 +1,12 @@
 #include "DataColor.h"
 
+#include <vector>
+
 DataColor::DataColor(int size, Color dataColor)
 {
-	Color DataColor[size + 1]{dataColor};
-
-	m_ColorData = DataColor;
+	m_DataColor.resize(size + 1);
+	for(int i=0; i<size+1; i++)
+	{
+		m_DataColor[i] = dataColor;
+	}
 }

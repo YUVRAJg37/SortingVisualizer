@@ -11,9 +11,9 @@ std::vector<int> SelectionSort::SortData(std::vector<int>& data, int size, Cache
                 cache.j = i;
         }
 
-        int temp = data[cache.j];
+        int Temp = data[cache.j];
         data[cache.j] = data[cache.i];
-        data[cache.i] = temp;
+        data[cache.i] = Temp;
      
         cache.i++;
         return data;

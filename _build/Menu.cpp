@@ -5,30 +5,30 @@
 #include "Screen.h"
 
 Menu::Menu(int spacing_x, int spacing_y) :
-TotalButtonCount(0),
-Pos_X(0),
-ButtonHeight(0),
-ButtonWidth(0),
-CurrentPressedButtonIndex(-1)
+m_TotalButtonCount(0),
+m_Pos_X(0),
+m_ButtonHeight(0),
+m_ButtonWidth(0),
+m_CurrentPressedButtonIndex(-1)
 {
     ScreenInfo screenInfo;
 
-    Spacing_Y = spacing_y;
+    m_Spacing_Y = spacing_y;
 
-    ButtonWidth = screenInfo.menuWidth - 2*spacing_x;
-    Pos_X = screenInfo.visualizerWidth + (screenInfo.menuWidth - ButtonWidth)/2;
+    m_ButtonWidth = screenInfo.menuWidth - 2*spacing_x;
+    m_Pos_X = screenInfo.visualizerWidth + (screenInfo.menuWidth - m_ButtonWidth)/2;
 }
 
 void Menu::AddButton(const char* buttonName)
 {
-    TotalButtonCount++;
-    ButtonNames.push(buttonName);
+    m_TotalButtonCount++;
+    m_ButtonNames.push(buttonName);
 }
 
 void Menu::PushButton()
 {
-    TotalButtonCount = 0;
-    Buttons.clear();
+    m_TotalButtonCount = 0;
+    m_Buttons.clear();
 }
 
 void Menu::PopButton()
@@ -40,47 +40,47 @@ void Menu::PopButton()
 void Menu::DrawButtons()
 {
     ScreenInfo screenInfo;
-    ButtonHeight = (screenInfo.screenHeight - (TotalButtonCount + 1)*Spacing_Y)/TotalButtonCount;
-    int fontSize = 30;
-    int padding = 3;
+    m_ButtonHeight = (screenInfo.screenHeight - (m_TotalButtonCount + 1)*m_Spacing_Y)/m_TotalButtonCount;
+    int FontSize = 30;
+    int Padding = 3;
     
-    for(int i=0; i<TotalButtonCount; i++)
+    for(int i=0; i<m_TotalButtonCount; i++)
     {
-        int Pos_Y = (ButtonHeight + Spacing_Y)*i + Spacing_Y;
-        Rectangle button, border;
+        int Pos_Y = (m_ButtonHeight + m_Spacing_Y)*i + m_Spacing_Y;
+        Rectangle Button, Border;
 
-        button.x = Pos_X;
-        button.y = Pos_Y;
-        button.height = ButtonHeight;
-        button.width = ButtonWidth;
-        border.x = Pos_X + padding;
-        border.y = Pos_Y + padding;
-        border.width = ButtonWidth - 2*padding;
-        border.height = ButtonHeight - 2*padding;
+        Button.x = m_Pos_X;
+        Button.y = Pos_Y;
+        Button.height = m_ButtonHeight;
+        Button.width = m_ButtonWidth;
+        Border.x = m_Pos_X + Padding;
+        Border.y = Pos_Y + Padding;
+        Border.width = m_ButtonWidth - 2*Padding;
+        Border.height = m_ButtonHeight - 2*Padding;
 
-        Color BorderColor = CurrentHoveredButtonIndex == i ? DARKBLUE : LIGHTGRAY;
-        Color TextColor = CurrentHoveredButtonIndex == i ? DARKBLUE : GRAY;
-        Color ButtonColor = CurrentHoveredButtonIndex == i ? SKYBLUE : LIGHTGRAY;
+        Color BorderColor = m_CurrentHoveredButtonIndex == i ? DARKBLUE : LIGHTGRAY;
+        Color TextColor = m_CurrentHoveredButtonIndex == i ? DARKBLUE : GRAY;
+        Color ButtonColor = m_CurrentHoveredButtonIndex == i ? SKYBLUE : LIGHTGRAY;
 
         
-        DrawRectangleRec( button ,BorderColor);
-        DrawRectangleRec(border, ButtonColor);
-        Buttons.push_back(button);
-        DrawText(ButtonNames.front(), screenInfo.visualizerWidth + screenInfo.menuWidth/2 - fontSize - fontSize/2, Pos_Y + ButtonHeight/2 - fontSize/2, fontSize, TextColor);
-        ButtonNames.pop();
+        DrawRectangleRec(Button,BorderColor);
+        DrawRectangleRec(Border, ButtonColor);
+        m_Buttons.push_back(Button);
+        DrawText(m_ButtonNames.front(), screenInfo.visualizerWidth + screenInfo.menuWidth/2 - FontSize - FontSize/2, Pos_Y + m_ButtonHeight/2 - FontSize/2, FontSize, TextColor);
+        m_ButtonNames.pop();
     }
 
-    CurrentHoveredButtonIndex = CollisionTest();
+    m_CurrentHoveredButtonIndex = CollisionTest();
 }
 
 int Menu::CollisionTest()
 {
-    for(int i=0; i<Buttons.size(); i++)
+    for(int i=0; i<m_Buttons.size(); i++)
     {
-        if(CheckCollisionPointRec(GetMousePosition(), Buttons[i]))
+        if(CheckCollisionPointRec(GetMousePosition(), m_Buttons[i]))
         {
             if(IsMouseButtonPressed(MOUSE_BUTTON_LEFT))
-                CurrentPressedButtonIndex = i;
+                m_CurrentPressedButtonIndex = i;
             return i;
         }
     }
