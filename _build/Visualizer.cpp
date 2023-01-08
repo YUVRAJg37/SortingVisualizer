@@ -14,8 +14,6 @@ int main()
 {
 	BubbleSort bubbleSort;
 	SelectionSort selectionSort;
-
-	bool bColor = true;
 	
 	ScreenInfo screenInfo;
 	Menu menu(50, 50);
@@ -25,7 +23,6 @@ int main()
 	const int visualizerWidth = screenInfo.visualizerWidth;
 	
 	std::vector<int> dataArray{0};
-	Color dataColor[MAX_DATA+1]{WHITE};
 	Cache cache;
 
 	InitializeData(dataArray, 1, screenHeight);
@@ -72,58 +69,17 @@ int main()
 				selectionSort.SortData(dataArray, MAX_DATA, cache);
 				break;
 			}
+		default: break;
 		}
 
-		if(bColor)
+		float space{ 0 };
+		for (int i = 0; i < MAX_DATA; i++)
 		{
-			float space{ 0 };
-			for (int i = 0; i < MAX_DATA; i++)
-			{
-				DrawRectangle(space, screenHeight - dataArray[i], (float)visualizerWidth/ MAX_DATA, dataArray[i], WHITE);
-				space += (float)visualizerWidth / MAX_DATA;
-			}
-		}
-		else
-		{
-				if (cache.i != MAX_DATA - 1)
-			{
-				float space{ 0 };
-				
-				if (GetRandomValue(0, 1) == 0)
-				{
-					dataColor[cache.j + 1] = WHITE;
-					dataColor[cache.j] = BLUE;
-				}
-				else
-				{
-					dataColor[cache.j] = WHITE;
-					dataColor[cache.j + 1] = BLUE;
-				}
-				
-				if(cache.j-1 > 0)
-					dataColor[cache.j - 1] = RED;
-				
-				for (int i = 0; i < MAX_DATA; i++)
-				{
-					DrawRectangle(space, screenHeight - dataArray[i], (float)visualizerWidth/ MAX_DATA, dataArray[i], dataColor[i]);
-					space += (float)visualizerWidth / MAX_DATA;
-				}
-			}
-			else
-			{
-				float space{ 0 };
-				for (int i = 0; i < MAX_DATA; i++)
-				{
-					DrawRectangle(space, screenHeight - dataArray[i], (float)visualizerWidth/ MAX_DATA, dataArray[i], WHITE);
-					space += (float)visualizerWidth / MAX_DATA;
-				}
-			}
+			DrawRectangle(space, screenHeight - dataArray[i], (float)visualizerWidth/ MAX_DATA, dataArray[i], WHITE);
+			space += (float)visualizerWidth / MAX_DATA;
 		}
 
 		EndDrawing();
-
-		dataColor[cache.j + 1] = GREEN;
-		dataColor[cache.j] = GREEN;
 
 		PreviousButtonIndex = CurrentButtonIndex;
 	}

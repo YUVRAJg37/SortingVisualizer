@@ -15,6 +15,11 @@
     <ClInclude Include="Sort\Sort.h" />
     <ClInclude Include="Sort\BubbleSort\BubbleSort.h" />
     <ClInclude Include="Cache.h" />
+    <ClInclude Include="Menu.h" />
+    <ClInclude Include="Screen.h" />
+    <ClInclude Include="Sort\QuickSort\QuickSort.h" />
+    <ClInclude Include="Sort\SelectionSort\SelectionSort.h" />
+    <ClInclude Include="DataColor.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Visualizer.cpp">
@@ -22,5 +27,9 @@
     </ClCompile>
     <ClCompile Include="Sort\BubbleSort\BubbleSort.cpp" />
     <ClCompile Include="Sort\Sort.cpp" />
+    <ClCompile Include="Menu.cpp" />
+    <ClCompile Include="Sort\QuickSort\QuickSort.cpp" />
+    <ClCompile Include="Sort\SelectionSort\SelectionSort.cpp" />
+    <ClCompile Include="DataColor.cpp" />
   </ItemGroup>
 </Project>
