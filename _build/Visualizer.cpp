@@ -1,5 +1,6 @@
 #include <iostream>
 
+#include "DataColor.h"
 #include "Sort/BubbleSort/BubbleSort.h"
 #include "Sort/SelectionSort/SelectionSort.h"
 #include "Screen.h"
@@ -16,6 +17,7 @@ int main()
 {
 	BubbleSort bubbleSort;
 	SelectionSort selectionSort;
+	DataColor dataColor(MAX_DATA);
 	
 	ScreenInfo screenInfo;
 	Menu menu(50, 50);
@@ -76,10 +78,13 @@ int main()
 		default: break;
 		}
 
+		dataColor.UpdateDataColor(&cache);
+		
 		float space{ 0 };
 		for (int i = 0; i < MAX_DATA; i++)
 		{
-			DrawRectangle(space, ScreenHeight - DataArray[i], (float)VisualizerWidth/ MAX_DATA, DataArray[i], WHITE);
+			DrawRectangle(space, ScreenHeight - DataArray[i], (float)VisualizerWidth/ MAX_DATA, DataArray[i],
+				dataColor.GetDataColor()[i]);
 			space += (float)VisualizerWidth / MAX_DATA;
 		}
 
